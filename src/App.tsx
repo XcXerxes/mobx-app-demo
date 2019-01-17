@@ -12,6 +12,9 @@ type Props = {
 
 @observer
 class App extends React.PureComponent<Props> {
+  public componentDidMount() {
+    this.props.appState.fetchData()
+  }
   public render() {
     return (
       <div className="App">
@@ -23,6 +26,16 @@ class App extends React.PureComponent<Props> {
           {this.props.appState.timer}
         </p>
         <button onClick={() => this.props.appState.setTimer()}>增加</button>
+        <ul>
+          {this.props.appState.list.length > 0 && this.props.appState.list.map((item: any, index:number) => (
+            <li key={item.sha}>
+              <span>{item.name}</span>
+              <span>{item.path}</span>
+              <span>{item.size}</span>
+              <span>{item.url}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     )
   }
